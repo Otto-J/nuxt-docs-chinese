@@ -30,7 +30,7 @@ jobs:
           rm -rf docs
           git clone --depth 1 https://github.com/nuxt/nuxt.git
 
-      - name: Commit
+      - name: Commit and Push
         run: |
           if [ -n "$(git status --porcelain docs)" ]; then 
             cp -r nuxt/docs ./ 
@@ -49,9 +49,9 @@ jobs:
       #     git commit -m "Synchronize Nuxt docs"
       #     git push --force
 
-      - name: Merge or create PR
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git checkout -- docs 
-          git merge raw --no-edit || (git merge --abort && echo "Merge conflict, creating PR" && gh pr create --base docs --head raw --title "Merge Nuxt docs" --body "Manual merge required due to conflicts." --repo ${{ github.repository }})
+      # - name: Merge or create PR
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     git checkout -- doc
+      #     git merge raw --no-edit || (git merge --abort && echo "Merge conflict, creating PR" && gh pr create --base docs --head raw --title "Merge Nuxt docs" --body "Manual merge required due to conflicts." --repo ${{ github.repository }})
