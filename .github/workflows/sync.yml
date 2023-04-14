@@ -33,6 +33,8 @@ jobs:
       - name: Commit
         run: |
           cp -r nuxt/docs ./
+          # 先临时删除
+          rm -rf nuxt
           git add docs
           git commit -m "Synchronize Nuxt docs"
           git push --force
