@@ -41,5 +41,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git checkout docs
+          git checkout -- docs 
           git merge raw --no-edit || (git merge --abort && echo "Merge conflict, creating PR" && gh pr create --base docs --head raw --title "Merge Nuxt docs" --body "Manual merge required due to conflicts." --repo ${{ github.repository }})
