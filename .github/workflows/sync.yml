@@ -22,11 +22,16 @@ jobs:
           node-version: 18
 
       - name: Download Nuxt Docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "GitHub Actions"
           git config user.email "${{ secrets.EMAIL }}}"
           rm -rf docs
           git clone --depth 1 https://github.com/nuxt/nuxt.git
+
+      - name: Commit
+        run: |
           cp -r nuxt/docs ./
           git add docs
           git commit -m "Synchronize Nuxt docs"
