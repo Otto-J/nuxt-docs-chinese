@@ -26,8 +26,8 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "${{ secrets.EMAIL }}}"
           rm -rf docs
-          git clone --depth 1 --filter=blob:none --no-checkout https://github.com/nuxt/nuxt.git
-          mv nuxt/docs ./
+          git clone --depth 1 https://github.com/nuxt/nuxt.git
+          cp -r nuxt/docs ./
           git add docs
           git commit -m "Synchronize Nuxt docs"
           git push --force
