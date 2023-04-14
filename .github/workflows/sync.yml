@@ -2,7 +2,7 @@ name: Sync Nuxt Docs
 
 on:
   schedule:
-    - cron: '0 2 * * *' # 每天 UTC 时间 2 点（即北京时间早上 10 点）执行
+    - cron: "0 2 * * *" # 每天 UTC 时间 2 点（即北京时间早上 10 点）执行
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: Download Nuxt Docs
         run: |
           git config user.name "GitHub Actions"
-          git config user.email "noreply@github.com"
+          git config user.email "${{ secrets.EMAIL }}}"
           rm -rf docs
           git clone --depth 1 --filter=blob:none --no-checkout https://github.com/nuxt/nuxt.git
           mv nuxt/docs ./
@@ -38,4 +38,3 @@ jobs:
         run: |
           git checkout docs
           git merge raw --no-edit || (git merge --abort && echo "Merge conflict, creating PR" && gh pr create --base docs --head raw --title "Merge Nuxt docs" --body "Manual merge required due to conflicts." --repo ${{ github.repository }})
-
