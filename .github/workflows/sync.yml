@@ -32,10 +32,10 @@ jobs:
 
       - name: Commit and Push
         run: |
+          cp -r nuxt/docs ./ 
+          # 先临时删除 rm -rf nuxt 
+          git add docs 
           if [ -n "$(git status --porcelain docs)" ]; then 
-            cp -r nuxt/docs ./ 
-            # 先临时删除 rm -rf nuxt 
-            git add docs 
             git commit -m "Synchronize Nuxt docs" 
             git push --force 
           fi
